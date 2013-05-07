@@ -36,7 +36,7 @@ Example:
 The component instance options should contain a list of script objects which have an `update` function:
 
     game.scripts.controller = {
-      update: function (dt) {
+      update: function (obj, dt) {
         //...do stuff here
       }
     };
@@ -45,6 +45,13 @@ The component instance options should contain a list of script objects which hav
     });
 
 Scripts will be called in the order in which they are listed.
+
+The update function is called with two parameters:
+
+`obj` is the parent object of the component.
+Through this you can access other components of the object.
+
+`dt` is the time elapsed in milliseconds since the last update.
 
 
 ## License
