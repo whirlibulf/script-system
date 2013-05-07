@@ -50,6 +50,7 @@ The update function is called with two parameters:
 
 `obj` is the parent object of the component.
 Through this you can access other components of the object.
+Do not keep a reference of this object, otherwise the engine cannot delete it.
 
 `dt` is the time elapsed in milliseconds since the last update.
 
