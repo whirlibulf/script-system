@@ -11,7 +11,41 @@ Contains the system and component for update scripts.
 
 ## API
 
-   
+### Script System
+
+The system calls the `update` function of each script listed in the script component.
+
+It has no options available.
+
+Example:
+
+    var script = require('script-system');
+    game.addSystem(new script.System());
+
+### Script Component
+
+The script component factory has no options available.
+
+The component ID is called `script`.
+
+Example:
+
+    var script = require('script-system');
+    game.addComponent(new script.Component());
+
+The component instance options should contain a list of script objects which have an `update` function:
+
+    game.scripts.controller = {
+      update: function (dt) {
+        //...do stuff here
+      }
+    };
+    game.createComponent('script', {
+      scripts: [game.scripts.controller]
+    });
+
+Scripts will be called in the order in which they are listed.
+
 
 ## License
 
