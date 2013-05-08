@@ -1,5 +1,4 @@
 function System() {
-  var that = this;
 }
 
 System.prototype.init = function (engine) {
