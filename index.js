@@ -1,15 +1,11 @@
-var Emitter = require('emitter');
-
 function System() {
   var that = this;
-
-  this.on('register', function (engine) {
-    console.log('Script system loaded');
-    that.engine = engine;
-  });
 }
 
-Emitter(System.prototype);
+System.prototype.init = function (engine) {
+  console.log('Script system loaded');
+  this.engine = engine;
+};
 
 System.prototype.update = function (dt) {
   var components, i;

@@ -4,15 +4,11 @@
   "description": "Script system and component for the whirlibulf game engine",
   "version": "0.0.1",
   "keywords": ["whirlibulf"],
-  "dependencies": {
-    "component/emitter": "*"
-  },
+  "dependencies": {},
   "development": {},
   "license": "MIT",
   "main": "index.js",
   "scripts": [
-    "index.js",
-    "lib/system.js",
-    "lib/component.js"
+    "index.js"
   ]
 }
