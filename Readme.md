@@ -1,37 +1,30 @@
 
 # script-system
 
-A package for the whirlibulf game engine.
+A system for executing arbitrary update scripts attached to game objects in the Whirlibulf game engine.
 
-Contains the system and component for update scripts.
+## Required Components
+
+* [whirlibulf/script-component](http://github.com/whirlibulf/script-component)
 
 ## Installation
 
     $ component install whirlibulf/script-system
 
-## API
+## Usage
 
-### Script System
+The system calls the `update` function of each script object listed in the script component.
 
-The system calls the `update` function of each script listed in the script component.
+The system itself has no options available.
 
-It has no options available.
+Register the system:
 
-Example:
-
-    var script = require('script-system');
-    game.addSystem(new script.System());
+    var scriptSystem = require('script-system');
+    game.addSystem(new scriptSystem());
 
 ### Script Component
 
-The script component factory has no options available.
-
-The component ID is called `script`.
-
-Example:
-
-    var script = require('script-system');
-    game.addComponent(new script.Component());
+This system requires the [whirlibulf/script-component](http://github.com/whirlibulf/script-component) component.
 
 The component instance options should contain a list of script objects which have an `update` function:
 
@@ -44,7 +37,7 @@ The component instance options should contain a list of script objects which hav
       scripts: [game.scripts.controller]
     });
 
-Scripts will be called in the order in which they are listed.
+Scripts will be called for each object in the order in which they are listed.
 
 The update function is called with two parameters:
 
