@@ -20,7 +20,7 @@ The system itself has no options available.
 Register the system:
 
     var scriptSystem = require('script-system');
-    game.addSystem(new scriptSystem());
+    game.use(new scriptSystem());
 
 ### Script Component
 
@@ -33,7 +33,8 @@ The component instance options should contain a list of script objects which hav
         //...do stuff here
       }
     };
-    game.createComponent('script', {
+
+    game.add('object id', 'script', {
       scripts: [game.scripts.controller]
     });
 
