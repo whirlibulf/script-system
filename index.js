@@ -2,17 +2,18 @@ function System() {
 }
 
 System.prototype.init = function (engine) {
-  console.log('Script system loaded');
+  console.log("Script system loaded");
   this.engine = engine;
 };
 
 System.prototype.update = function (dt) {
-  var components, i;
+  var entities, i, component;
 
-  components = this.engine.getAll('script');
-  for (i = 0; i < components.length; ++i) {
-    for (j = 0; j < components[i].scripts.length; ++j) {
-      components[i].scripts[j].update(this.engine, components[i]._object, dt);
+  entities = this.engine.getAll("script");
+  for (i = 0; i < entities.length; ++i) {
+    component = this.engine.get(entities[i], "script");
+    for (j = 0; j < component.scripts.length; ++j) {
+      components.scripts[j].update(this.engine, entities[i], dt);
     }
   }
 };
