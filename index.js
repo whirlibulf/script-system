@@ -12,7 +12,7 @@ System.prototype.update = function (dt) {
   components = this.engine.getAll('script');
   for (i = 0; i < components.length; ++i) {
     for (j = 0; j < components[i].scripts.length; ++j) {
-      components[i].scripts[j].update(components[i]._object, dt);
+      components[i].scripts[j].update(this.engine, components[i]._object, dt);
     }
   }
 };
