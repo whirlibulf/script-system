@@ -8,12 +8,12 @@ System.prototype.init = function (engine) {
     this.engine.on("start", function () {
         var entities, i, component;
 
-        entities = this.engine.getAll("script");
+        entities = engine.getAll("script");
         for (i = 0; i < entities.length; ++i) {
-            component = this.engine.get(entities[i], "script");
+            component = engine.get(entities[i], "script");
             for (j = 0; j < component.scripts.length; ++j) {
                 if (component.scripts[j].init) {
-                    component.scripts[j].init(this.engine, entities[i]);
+                    component.scripts[j].init(engine, entities[i]);
                 }
             }
         }
