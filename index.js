@@ -10,7 +10,7 @@ System.prototype.init = function (engine) {
     this.engine = engine;
     that = this;
 
-    this.engine("componentCreated", function (type, instance) {
+    this.engine.on("componentCreated", function (type, instance) {
         var i;
         if (type === "script") {
             that.components.push(instance);
