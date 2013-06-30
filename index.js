@@ -11,14 +11,15 @@ System.prototype.init = function (engine) {
     that = this;
 
     this.engine.on("componentCreated", function (type, component) {
-        var i;
+        var i, script;
         if (type === "script") {
             that.components.push(component);
 
             if (component.scripts) {
                 for (i = 0; i < component.scripts.length; ++i) {
-                    if (component.scripts[i].init) {
-                        component.scripts[i].init(engine, component._object);
+                    script = component.scripts[i];
+                    if (script.init && typeof script.init === "function") {
+                        script.init.call(engine, component._object);
                     }
                 }
             }
@@ -34,14 +35,15 @@ System.prototype.init = function (engine) {
 };
 
 System.prototype.update = function (dt) {
-    var entities, i, component;
+    var entities, i, component, script;
 
     entities = this.engine.getAll("script");
     for (i = 0; i < this.components.length; ++i) {
         component = this.components[i];
         for (j = 0; j < component.scripts.length; ++j) {
-            if (component.scripts[j].update) {
-                component.scripts[j].update(this.engine, component._object, dt);
+            script = component.scripts[j];
+            if (script.update && typeof script.update === "function") {
+                script.update.call(this.engine, component._object, dt);
             }
         }
     }
