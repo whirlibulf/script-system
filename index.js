@@ -19,7 +19,7 @@ System.prototype.init = function (engine) {
                 for (i = 0; i < component.scripts.length; ++i) {
                     script = component.scripts[i];
                     if (script.init && typeof script.init === "function") {
-                        script.init.call(engine, component._object);
+                        script.init.call(engine, component._entity);
                     }
                 }
             }
@@ -43,7 +43,7 @@ System.prototype.update = function (dt) {
         for (j = 0; j < component.scripts.length; ++j) {
             script = component.scripts[j];
             if (script.update && typeof script.update === "function") {
-                script.update.call(this.engine, component._object, dt);
+                script.update.call(this.engine, component._entity, dt);
             }
         }
     }
