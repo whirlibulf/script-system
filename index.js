@@ -15,7 +15,7 @@ System.prototype.init = function (engine) {
     this.engine.on("componentCreated", function (type, component, entity) {
         var i, script;
         if (type === "script") {
-            component = engine.get(entity, "script");
+            component = that.engine.get(entity, "script");
             for (i = 0; i < component.scripts.length; ++i) {
                 script = component.scripts[i];
                 if (script.init && typeof script.init === "function") {
