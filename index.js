@@ -1,35 +1,27 @@
 function System() {
     this.components = [];
+    this.index = null;
 }
 
 System.prototype.init = function (engine) {
     var that;
+    that = this;
 
     console.log("Script system loaded");
 
     this.engine = engine;
-    that = this;
+    this.index = this.engine.index(["script"]);
 
     this.engine.on("componentCreated", function (type, component) {
         var i, script;
         if (type === "script") {
-            that.components.push(component);
-
-            if (component.scripts) {
-                for (i = 0; i < component.scripts.length; ++i) {
-                    script = component.scripts[i];
-                    if (script.init && typeof script.init === "function") {
-                        script.init.call(engine, component._entity);
-                    }
+            component = engine.get(type, component);
+            for (i = 0; i < component.scripts.length; ++i) {
+                script = component.scripts[i];
+                if (script.init && typeof script.init === "function") {
+                    script.init.call(engine, component._entity);
                 }
             }
-        }
-    });
-
-    this.engine.on("componentRemoved", function (type, id) {
-        if (type === "script") {
-            that.components.length = 0;
-            that.components = that.engine.getAll("script");
         }
     });
 };
@@ -37,9 +29,9 @@ System.prototype.init = function (engine) {
 System.prototype.update = function (dt) {
     var entities, i, component, script;
 
-    entities = this.engine.getAll("script");
-    for (i = 0; i < this.components.length; ++i) {
-        component = this.components[i];
+    entities = this.engine.getAll(this.index);
+    for (i = 0; i < entities.length; ++i) {
+        component = this.engine.get("script", entities[i].script);
         for (j = 0; j < component.scripts.length; ++j) {
             script = component.scripts[j];
             if (script.update && typeof script.update === "function") {
