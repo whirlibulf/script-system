@@ -12,10 +12,10 @@ System.prototype.init = function (engine) {
     this.engine = engine;
     this.index = this.engine.index(["script"]);
 
-    this.engine.on("componentCreated", function (type, component) {
+    this.engine.on("componentCreated", function (type, component, entity) {
         var i, script;
         if (type === "script") {
-            component = engine.get(type, component);
+            component = engine.get(entity, "script");
             for (i = 0; i < component.scripts.length; ++i) {
                 script = component.scripts[i];
                 if (script.init && typeof script.init === "function") {
@@ -31,7 +31,7 @@ System.prototype.update = function (dt) {
 
     entities = this.engine.getAll(this.index);
     for (i = 0; i < entities.length; ++i) {
-        component = this.engine.get("script", entities[i].script);
+        component = this.engine.get(entities[i], "script");
         for (j = 0; j < component.scripts.length; ++j) {
             script = component.scripts[j];
             if (script.update && typeof script.update === "function") {
