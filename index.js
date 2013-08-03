@@ -10,7 +10,7 @@ System.prototype.init = function (engine) {
     console.log("Script system loaded");
 
     this.engine = engine;
-    this.index = this.engine.index(["script"]);
+    this.index = this.engine.index("script");
 
     this.engine.on("componentCreated", function (type, component, entity) {
         var i, script;
@@ -27,7 +27,7 @@ System.prototype.init = function (engine) {
 };
 
 System.prototype.update = function (dt) {
-    var entities, i, component, script;
+    var entities, i, j, component, script;
 
     entities = this.engine.getAll(this.index);
     for (i = 0; i < entities.length; ++i) {
